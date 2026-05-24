@@ -1,6 +1,7 @@
 docs/diagrams/*_gen.puml
 docs/diagrams/*.png
 docs/diagrams/*.svg
+/bin
 
 # Binaries for programs and plugins
 *.exe
@@ -8,7 +9,6 @@ docs/diagrams/*.svg
 *.dll
 *.so
 *.dylib
-/kubegraph
 
 # Test binary, built with `go test -c`
 *.test
@@ -24,9 +24,6 @@ tmp/
 
 # goreleaser build and distribution files
 dist/
-
-# SonarQube
-.scannerwork/
 
 # lint, test and coverage reports
 golangci-lint-report.xml

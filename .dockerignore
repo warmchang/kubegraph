@@ -10,7 +10,6 @@ icons/*.svg
 .gitignore
 .golangci.yaml
 .goreleaser.yml
-.wakatime-project
 /*.md
 CODEOWNERS
 docker-*.yaml
@@ -21,7 +20,6 @@ Makefile
 sample.*
 /*.png
 /*.svg
-sonar-project.properties
 
 # Binaries for programs and plugins
 *.exe
@@ -44,9 +42,6 @@ tmp/
 
 # goreleaser build and distribution files
 dist/
-
-# SonarQube
-.scannerwork/
 
 # lint, test and coverage reports
 golangci-lint-report.xml

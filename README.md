@@ -8,7 +8,6 @@
 [![GitHub Issues](https://img.shields.io/github/issues/wwmoraes/kubegraph.svg)](https://github.com/wwmoraes/kubegraph/issues)
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/wwmoraes/kubegraph.svg)](https://github.com/wwmoraes/kubegraph/pulls)
 
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/wwmoraes/kubegraph/master.svg)](https://results.pre-commit.ci/latest/github/wwmoraes/kubegraph/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f75bfca2d8a64170b48f/maintainability)](https://codeclimate.com/github/wwmoraes/kubegraph/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/f75bfca2d8a64170b48f/test_coverage)](https://codeclimate.com/github/wwmoraes/kubegraph/test_coverage)
 
@@ -51,8 +50,6 @@ make build
 
 Kubegraph is done using Golang 1.15, using a pure Go graphviz implementation to
 generate the graph.
-
-Everything is set as a direct dependency, and `go mod vendor` will install for you.
 
 ### Installing
 

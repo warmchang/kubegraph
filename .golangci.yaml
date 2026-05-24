@@ -1,17 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/golangci/golangci-lint/refs/tags/v2.10.1/jsonschema/golangci.jsonschema.json
+version: "2"
 run:
-  modules-download-mode: vendor
+  modules-download-mode: readonly
   issues-exit-code: 0
   timeout: 2m
 output:
-  format: colored-line-number
-linters-settings:
+  formats:
+    text:
+      path: stdout
+    sarif:
+      path: golangci-lint.sarif
+linters:
   enable:
-  - stylecheck
   - unconvert
   - gosec
   - errorlint
-  - maligned
-  - interfacer
   - unparam
   - whitespace
   - wrapcheck

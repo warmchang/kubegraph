@@ -49,9 +49,14 @@ define dockerCachedTag
 --tag $(REPO):$(2)$(1)
 endef
 
-.DEFAULT_GOAL := build
+-include .make/*.mk
+-include .meta/make/*.mk
+
+.DEFAULT_GOAL := all
 
 TMPDIR ?= $(or $(TMPDIR),$(shell dirname $(shell mktemp -u)))
+
+all: bin/kubegraph
 
 .PHONY: icons
 icons: $(ICONS_GO_FILE)
@@ -63,20 +68,9 @@ $(ICONS_GO_FILE): $(ICONS_FILES)
 	$(info regenerating icons package file...)
 	@go-bindata -o $(ICONS_GO_FILE) -pkg $(ICONS_PKG) -nometadata -mode 0664 -nomemcopy $(ICONS_FOLDER)
 
-.PHONY: lint
-lint: yamllint
+check::
+	nix flake check -L
 	golangci-lint run
-
-yamllint:
-	@yamllint $(YAMLS)
-
-.PHONY: test
-test:
-	go test -race -v ./...
-
-.PHONY: coverage
-coverage: coverage.out
-	@go tool cover -func=$<
 
 .PHONY: coverage-html
 coverage-html: coverage.html
@@ -87,22 +81,11 @@ coverage-html: coverage.html
 %.out: $(SOURCE_FILES)
 	@go test -race -cover -coverprofile=$@ -v ./...
 
-.PHONY: build
-build: kubegraph
-
 .PHONY: wire
 wire: $(WIRE_GEN_FILES)
 
-kubegraph: $(SOURCE_FILES) vendor
-	go build -mod=vendor -race -o ./ ./...
-
-vendor: go.sum
-
-go.sum: go.mod
-	go mod vendor
-
 .PHONY: run
-run: $(SOURCE_FILES) vendor
+run: $(SOURCE_FILES)
 	go run cmd/kubegraph/main.go sample.yaml
 	dot -Tsvg -o sample.svg sample.dot
 
@@ -155,7 +138,7 @@ test-release:
 	env -u GITLAB_TOKEN goreleaser release --rm-dist --snapshot
 
 %_gen.go: %.go
-	wire ./...
+	go tool wire ./...
 
 $(GRAPHS_FOLDER)/full-gen.puml: cmd internal icons
 	$(info generating $@...)
